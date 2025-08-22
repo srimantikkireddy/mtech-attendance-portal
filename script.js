@@ -2,8 +2,15 @@ let currentSubject = null;
 let attendance = {};
 let saved = true;
 
+const toggleBtn = document.querySelector(".toggle-btn");
+const sidebar = document.querySelector(".sidebar");
+
+toggleBtn.addEventListener("click", () => {
+  sidebar.classList.toggle("active");
+});
+
 function toggleSidebar() {
-  document.getElementById("sidebar").classList.toggle("open");
+  sidebar.classList.toggle("open");
 }
 
 window.addEventListener("beforeunload", function (e) {
@@ -11,6 +18,14 @@ window.addEventListener("beforeunload", function (e) {
     e.preventDefault();
     e.returnValue = "You will lose unsaved attendance data!";
   }
+});
+
+document.querySelectorAll(".sidebar ul li a").forEach(item => {
+  item.addEventListener("click", (e) => {
+    e.preventDefault();
+    const subjectName = item.textContent.trim();  // Get sidebar text
+    document.getElementById("subject-title").textContent = subjectName;
+  });
 });
 
 const students = [
@@ -48,6 +63,7 @@ const students = [
   { reg: "207225032", name: "SWATI SONI" },
   { reg: "207225033", name: "VANAPARTHI SAI RAJ" }
 ];
+
 
 function selectSubject(sub, prof) {
   currentSubject = sub;
