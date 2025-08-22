@@ -137,14 +137,12 @@ body {
 .main {
   grid-area: main;
   padding: 20px;
+  padding-bottom: 80px;
   overflow-y: auto;
+  margin-left: 0;  
   min-width: 0;  
 }
 
-.main {
-  margin-left: 0;  
-  padding: 20px;
-}
 
 .header {
   text-align: center;
@@ -266,7 +264,7 @@ body {
   }
 }
 
-/* Tablets and above */
+
 @media (min-width: 769px) {
   body {
     grid-template-columns: 260px 1fr;
@@ -276,12 +274,22 @@ body {
   }
 
   .sidebar {
-    transform: translateX(0); /* always visible on larger screens */
+    transform: translateX(0); 
     position: relative;
     box-shadow: none;
   }
 
   .toggle-btn {
-    display: none; /* hide toggle on large screens */
+    display: none; 
   }
+}
+
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .main-content {
+    padding-bottom: calc(80px + env(safe-area-inset-bottom));
+  }
+}
+
+.save-btn {
+  margin-bottom: 20px;
 }
