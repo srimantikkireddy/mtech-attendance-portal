@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MTech Attendance Portal | NIT Trichy</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <header class="topbar">
+    <div class="logo-container">
+      <img src="nit_trichy_logo.png" alt="NIT Trichy Logo" class="logo">
+    </div>
+    <div class="portal-title">
+      <h1>MTech Power Electronics 2025–27 Attendance Portal</h1>
+    </div>
+    <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+  </header>
+
+  <aside class="sidebar" id="sidebar">
+    <h3>Subjects</h3>
+    <ul id="classList">
+      <li onclick="selectSubject('EE653 | LINEAR AND NON-LINEAR SYSTEM THEORY', 'Dr. V. Sankaranarayanan')">LINEAR AND NON-LINEAR SYSTEM THEORY <br><small>Dr. V. Sankaranarayanan</small></li>
+      <li onclick="selectSubject('EE651 | POWER CONVERTERS', 'Dr. P. Srinivasa Rao Nayak')">POWER CONVERTERS <br><small>Dr. P. Srinivasa Rao Nayak</small></li>
+      <li onclick="selectSubject('EE673 | RENEWABLE POWER GENERATION TECHNOLOGIES', 'Dr. Josephine. R. L.')">RENEWABLE POWER GENERATION TECHNOLOGIES <br><small>Dr. Josephine. R. L.</small></li>
+      <li onclick="selectSubject('MA603 | ADVANCED ENGINEERING MATHEMATICS', 'Mr. Muthu Kumar S.')">ADVANCED ENGINEERING MATHEMATICS <br><small>Mr. Muthu Kumar S.</small></li>
+      <li onclick="selectSubject('EE701 | SOFT SWITCHING POWER CONVERTERS', 'Dr.Shelas Sathyan')">SOFT SWITCHING POWER CONVERTERS <br><small>Dr.Shelas Sathyan</small></li>
+      <li onclick="selectSubject('EE692 | DIGITAL SIMULATION OF POWER ELECTRONIC SYSTEMS', 'Dr. S. Mageshwari')">DIGITAL SIMULATION OF POWER ELECTRONIC SYSTEMS <br><small>Dr. S. Mageshwari</small></li>
+      <li onclick="selectSubject('EE657 | DESIGN AND SIMULATION OF POWER ELECTRONIC CIRCUITS LABORATORY', 'Dr. K. Sundareswaran')">DESIGN AND SIMULATION OF POWER ELECTRONIC CIRCUITS LABORATORY <br><small>Dr. K. Sundareswaran</small></li>
+      <li onclick="selectSubject('EE659 | POWER ELECTRONICS SYSTEMS LABORATORY', 'Dr. V. Vignesh Kumar')">POWER ELECTRONICS SYSTEMS LABORATORY <br><small>Dr. V. Vignesh Kumar</small></li>
+    </ul>
+  </aside>
+
+  <main class="main">
+    <div class="header">
+      <h3 id="subjectTitle">Select a subject</h3>
+    </div>
+    <div class="students" id="studentsContainer"></div>
+    <button class="download-btn" onclick="downloadCSV()">Save Attendance</button>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
