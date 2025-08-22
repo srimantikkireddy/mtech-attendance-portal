@@ -13,6 +13,26 @@ function toggleSidebar() {
   sidebar.classList.toggle("open");
 }
 
+const mainContent = document.querySelector(".main-content");
+
+document.querySelectorAll(".sidebar ul li a").forEach(item => {
+  item.addEventListener("click", () => {
+    sidebar.classList.remove("active");
+  });
+});
+
+// Collapse sidebar when clicking outside it
+document.addEventListener("click", (event) => {
+  if (
+    sidebar.classList.contains("active") && 
+    !sidebar.contains(event.target) && 
+    !event.target.closest(".toggle-btn") // exclude toggle button itself
+  ) {
+    sidebar.classList.remove("active");
+  }
+});
+
+
 window.addEventListener("beforeunload", function (e) {
   if (!saved) {
     e.preventDefault();
