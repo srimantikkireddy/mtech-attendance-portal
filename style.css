@@ -96,6 +96,7 @@ body {
 
 .sidebar li:hover {
   background: #ffffff;
+  opacity: 0.5;
 }
 
 .sidebar.active {
@@ -171,13 +172,13 @@ body {
 
 .student {
   text-align: center;
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .student .name {
   margin-top: 6px;
   font-weight: 500;
-  font-size: 13px;
+  font-size: 10px;
   color: #222;
 }
 
