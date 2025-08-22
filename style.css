@@ -9,7 +9,7 @@ body {
     "sidebar main";
   height: 100vh;
   background: #f7f9fb;
-  color: #333;
+  color: #ffffff;
   overflow: hidden; 
 }
 
@@ -21,18 +21,23 @@ body {
   position: relative;
   background: #002855;
   color: white;
-  padding: 35px 32px;   
+  padding: 20px 16px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.25);
   text-align: center;
 }
 
 .logo-container {
-  position: absolute;
-  left: 20px;
+  flex: 0 0 auto;
+  margin-right: 16px;
 }
 
 .logo {
-  height: 90px;
+  height: 70px;
+}
+
+.portal-title {
+  flex: 1;
+  text-align: center;
 }
 
 .portal-title h1 {
@@ -42,15 +47,28 @@ body {
   text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
 }
 
+.toggle-btn {
+  display: block;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #fff;
+  cursor: pointer;
+  margin-right: 15px;
+}
+
 .sidebar {
-  grid-area: sidebar;
-  background: #1e3a5f;
-  color: white;
-  padding: 24px;
-  overflow-y: auto;     
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 260px;
+  height: 100%;
+  background: #2c3e50;
+  padding: 20px;
+  transform: translateX(-100%);
   transition: transform 0.3s ease;
-  width: 280px;
-  box-sizing: border-box; 
+  z-index: 1000;
+  overflow-y: auto;
 }
 
 .sidebar li {
@@ -67,7 +85,7 @@ body {
 .sidebar h3 {
   margin-top: 0;
   font-size: 16px;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #ffffff;
   padding-bottom: 5px;
 }
 
@@ -77,19 +95,42 @@ body {
 }
 
 .sidebar li:hover {
-  background: #3a5a8f;
+  background: #ffffff;
 }
 
+.sidebar.active {
+  transform: translateX(0);
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.sidebar ul li a {
+  color: #ffffff;        /* Default text color */
+  font-weight: 500;      /* Make it bolder if needed */
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+}
+
+.sidebar ul li a:hover {
+  background-color: #1a237e;  /* Darker hover background */
+  color: #ffeb3b;             /* Yellow text on hover */
+}
 
 .toggle-btn {
-  position: absolute;
-  right: 20px;
+  display: block;
   background: transparent;
   color: white;
-  font-size: 22px;
+  font-size: 26px;
   border: none;
   cursor: pointer;
-  display: none;
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1100;
 }
 
 .main {
@@ -97,6 +138,11 @@ body {
   padding: 20px;
   overflow-y: auto;
   min-width: 0;  
+}
+
+.main {
+  margin-left: 0;  
+  padding: 20px;
 }
 
 .header {
@@ -140,6 +186,12 @@ body {
   color: #666;
 }
 
+.subjectTitle {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #0d47a1;
+}
+
 .circle {
   width: 80px;
   height: 80px;
@@ -181,22 +233,54 @@ body {
       "topbar"
       "main";
   }
-  .sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 260px;
-    transform: translateX(-100%);
-    z-index: 1000;
+
+  .topbar {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
   }
-  .sidebar.open {
-    transform: translateX(0);
-  }
-  .main {
-    padding: 16px;
-  }
+
   .portal-title h1 {
-    font-size: 18px; 
+    font-size: 15px;
+    text-align: center;
+    margin: 4px 40px;
+  }
+
+  .logo {
+    height: 50px;
+  }
+
+  .main {
+    padding: 12px;
+  }
+
+  .students {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 16px;
+  }
+
+  .circle {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+/* Tablets and above */
+@media (min-width: 769px) {
+  body {
+    grid-template-columns: 260px 1fr;
+    grid-template-areas:
+      "topbar topbar"
+      "sidebar main";
+  }
+
+  .sidebar {
+    transform: translateX(0); /* always visible on larger screens */
+    position: relative;
+    box-shadow: none;
+  }
+
+  .toggle-btn {
+    display: none; /* hide toggle on large screens */
   }
 }
