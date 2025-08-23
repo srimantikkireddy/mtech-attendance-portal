@@ -3,14 +3,14 @@ body {
   font-family: "Poppins", "Segoe UI", Arial, sans-serif;
   display: grid;
   grid-template-rows: auto 1fr;
-  grid-template-columns: 280px 1fr; 
+  grid-template-columns: 280px 1fr;
   grid-template-areas:
     "topbar topbar"
     "sidebar main";
   height: 100vh;
   background: #f7f9fb;
   color: #ffffff;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
 .topbar {
@@ -24,6 +24,7 @@ body {
   padding: 20px 16px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.25);
   text-align: center;
+  flex-wrap: wrap;
 }
 
 .logo-container {
@@ -48,15 +49,19 @@ body {
 }
 
 .toggle-btn {
-  display: block;
-  background: none;
+  background: transparent;
   border: none;
-  font-size: 24px;
-  color: #fff;
+  color: white;
+  font-size: 26px;
   cursor: pointer;
-  margin-right: 15px;
+  padding: 8px;
+  margin-left: 12px;
+  z-index: 2000;            /* ensure it's above other elements */
+  pointer-events: auto;     /* ensure clickable */
+  -webkit-tap-highlight-color: rgba(0,0,0,0); /* nicer mobile tap */
 }
 
+/* Sidebar */
 .sidebar {
   position: fixed;
   top: 0;
@@ -71,17 +76,6 @@ body {
   overflow-y: auto;
 }
 
-.sidebar li {
-  margin: 14px 0;
-  padding: 12px;
-  background: #2f528f;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 15px;
-  transition: background 0.2s;
-  line-height: 1.4;
-}
-
 .sidebar h3 {
   margin-top: 0;
   font-size: 16px;
@@ -92,73 +86,73 @@ body {
 .sidebar ul {
   list-style: none;
   padding: 0;
+  margin: 0;
+}
+
+/* make full li clickable, centered and keep original colors */
+.sidebar li {
+  display: block;
+  margin: 14px 0;
+  padding: 12px;
+  background: #2f528f;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background 0.2s, color 0.2s;
+  line-height: 1.4;
+  color: #ffffff;
+  text-align: center;
+  user-select: none;
+}
+
+.sidebar li small {
+  display: block;
+  margin-top: 6px;
+  color: rgba(255,255,255,0.95);
+  font-size: 12px;
+  font-weight: 500;
 }
 
 .sidebar li:hover {
   background: #ffffff;
-  opacity: 0.5;
+  color: #2c3e50;
+  opacity: 1;
+}
+
+.sidebar li:hover small {
+  color: #2c3e50;
 }
 
 .sidebar.active {
   transform: translateX(0);
 }
 
-.sidebar.open {
-  transform: translateX(0);
-}
-
-.sidebar ul li a {
-  color: #ffffff;        /* Default text color */
-  font-weight: 500;      /* Make it bolder if needed */
-  text-decoration: none;
-  display: block;
-  padding: 10px;
-}
-
-.sidebar ul li a:hover {
-  background-color: #1a237e;  /* Darker hover background */
-  color: #ffeb3b;             /* Yellow text on hover */
-}
-
-.toggle-btn {
-  display: block;
-  background: transparent;
-  color: white;
-  font-size: 26px;
-  border: none;
-  cursor: pointer;
-  position: absolute;
-  right: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 1100;
-}
-
+/* Main area */
 .main {
   grid-area: main;
   padding: 20px;
   padding-bottom: 80px;
   overflow-y: auto;
-  margin-left: 0;  
-  min-width: 0;  
+  margin-left: 0;
+  min-width: 0;
 }
 
+.main-content {
+  padding-bottom: 80px;
+}
 
-.header {
+#subjectTitle,
+.subjectTitle {
   text-align: center;
   margin-bottom: 20px;
-}
-
-.header h3 {
+  color: #0d47a1;
   font-size: 22px;
   font-weight: 700;
-  color: #002855;
-  margin-bottom: 20px;
-  text-align: center;
   border-bottom: 2px solid #ccc;
   padding-bottom: 6px;
 }
 
+/* Students grid */
 .students {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -166,7 +160,6 @@ body {
   margin-top: 20px;
   justify-content: center;
 }
-
 
 .student {
   text-align: center;
@@ -185,26 +178,22 @@ body {
   color: #666;
 }
 
-.subjectTitle {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #0d47a1;
-}
-
+/* Attendance circle */
 .circle {
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: #28a745; 
+  background: #28a745;
   margin: auto;
   transition: background 0.3s;
   box-shadow: 0 2px 6px rgba(0,0,0,0.3);
 }
 
 .circle.absent {
-  background: #d9534f; 
+  background: #d9534f;
 }
 
+/* Save/Download button: sticky on mobile so it stays above system nav */
 .download-btn {
   margin-top: 25px;
   padding: 14px 28px;
@@ -218,6 +207,10 @@ body {
   margin-left: auto;
   margin-right: auto;
   transition: background 0.2s, transform 0.1s;
+  margin-bottom: env(safe-area-inset-bottom, 20px);
+  position: sticky;
+  bottom: calc(env(safe-area-inset-bottom, 12px) + 8px);
+  z-index: 20;
 }
 
 .download-btn:hover {
@@ -225,6 +218,7 @@ body {
   transform: scale(1.03);
 }
 
+/* Responsive: mobile layout (logo on top, title & toggle below) */
 @media (max-width: 768px) {
   body {
     grid-template-columns: 1fr;
@@ -234,19 +228,37 @@ body {
   }
 
   .topbar {
-    flex-direction: column;
-    align-items: center;
     padding: 10px;
+    justify-content: center;
   }
 
-  .portal-title h1 {
-    font-size: 15px;
+  .logo-container {
+    width: 100%;
     text-align: center;
-    margin: 4px 40px;
+    margin: 0 0 8px 0;
   }
 
   .logo {
     height: 50px;
+  }
+
+  .portal-title {
+    order: 2;
+    width: calc(100% - 52px);
+    text-align: center;
+  }
+
+  .portal-title h1 {
+    font-size: 15px;
+    margin: 4px 0;
+  }
+
+  .toggle-btn {
+    order: 3;
+    align-self: center;
+    margin-top: 6px;
+    padding: 10px 12px;
+    font-size: 24px;
   }
 
   .main {
@@ -264,7 +276,6 @@ body {
   }
 }
 
-
 @media (min-width: 769px) {
   body {
     grid-template-columns: 260px 1fr;
@@ -274,13 +285,13 @@ body {
   }
 
   .sidebar {
-    transform: translateX(0); 
+    transform: translateX(0);
     position: relative;
     box-shadow: none;
   }
 
   .toggle-btn {
-    display: none; 
+    display: none;
   }
 }
 
