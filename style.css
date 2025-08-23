@@ -209,7 +209,7 @@ body {
   transition: background 0.2s, transform 0.1s;
   margin-bottom: env(safe-area-inset-bottom, 20px);
   position: sticky;
-  bottom: calc(env(safe-area-inset-bottom, 20px) + 40px);
+  bottom: calc(env(safe-area-inset-bottom, 40px) + 40px);
   z-index: 20;
   opacity: 0.8;
 }
@@ -305,3 +305,4 @@ body {
 .save-btn {
   margin-bottom: 20px;
 }
+
