@@ -211,6 +211,7 @@ body {
   position: sticky;
   bottom: calc(env(safe-area-inset-bottom, 20px) + 40px);
   z-index: 20;
+  opacity: 0.8;
 }
 
 .download-btn:hover {
@@ -304,4 +305,5 @@ body {
 .save-btn {
   margin-bottom: 20px;
 }
+
 
